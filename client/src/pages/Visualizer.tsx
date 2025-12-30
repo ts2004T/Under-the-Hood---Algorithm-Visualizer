@@ -11,6 +11,8 @@ import { motion } from "framer-motion";
 // Algorithm generators
 import { generateBubbleSortSteps } from "@/lib/algorithms/sorting/bubbleSort";
 import { generateSelectionSortSteps } from "@/lib/algorithms/sorting/selectionSort";
+import { generateHeapSortSteps } from "@/lib/algorithms/sorting/heapSort";
+import { generateAStarSteps } from "@/lib/algorithms/pathfinding/aStar";
 import { AnimationStep } from "@/lib/algorithms/types";
 
 // Random array generator
@@ -44,6 +46,8 @@ export default function Visualizer() {
     let generatedSteps: AnimationStep[] = [];
     if (algoId === 'bubble-sort') generatedSteps = generateBubbleSortSteps(newArray);
     else if (algoId === 'selection-sort') generatedSteps = generateSelectionSortSteps(newArray);
+    else if (algoId === 'heap-sort') generatedSteps = generateHeapSortSteps(newArray);
+    else if (algoId === 'a-star') generatedSteps = generateAStarSteps(10, 10);
     // Add more algorithms here
     
     setSteps(generatedSteps);

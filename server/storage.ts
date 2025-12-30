@@ -224,6 +224,72 @@ end procedure`,
                 dist[v] := alt
     return dist
 end procedure`,
+      },
+      {
+        id: "heap-sort",
+        name: "Heap Sort",
+        category: "Sorting",
+        description: "A comparison-based sorting algorithm that uses a heap data structure. It divides the input into sorted and unsorted regions and iteratively shrinks the unsorted region by extracting the largest element.",
+        timeComplexity: "O(n log n)",
+        spaceComplexity: "O(1)",
+        pseudoCode: `procedure heapSort(A : list)
+    n := length(A)
+    
+    // Build max heap
+    for i := n/2 - 1 down to 0 do
+        heapify(A, n, i)
+    
+    // Extract elements from heap
+    for i := n - 1 down to 1 do
+        swap(A[0], A[i])
+        heapify(A, i, 0)
+end procedure
+
+procedure heapify(A, n, i)
+    largest := i
+    left := 2 * i + 1
+    right := 2 * i + 2
+    
+    if left < n and A[left] > A[largest]
+        largest := left
+    if right < n and A[right] > A[largest]
+        largest := right
+    
+    if largest != i
+        swap(A[i], A[largest])
+        heapify(A, n, largest)
+end procedure`,
+      },
+      {
+        id: "a-star",
+        name: "A* Pathfinding",
+        category: "Pathfinding",
+        description: "A pathfinding algorithm that finds the shortest path between nodes in a graph. It uses heuristics (like Manhattan distance) to guide the search and is widely used in game development and robotics.",
+        timeComplexity: "O(b^d)",
+        spaceComplexity: "O(b^d)",
+        pseudoCode: `procedure A*(start, goal, graph)
+    openSet := {start}
+    cameFrom := empty map
+    gScore[start] := 0
+    fScore[start] := heuristic(start, goal)
+    
+    while openSet is not empty do
+        current := node in openSet with lowest fScore
+        if current == goal
+            return reconstructPath(cameFrom, current)
+        
+        remove current from openSet
+        for each neighbor of current do
+            tentativeGScore := gScore[current] + cost(current, neighbor)
+            if tentativeGScore < gScore[neighbor]
+                cameFrom[neighbor] := current
+                gScore[neighbor] := tentativeGScore
+                fScore[neighbor] := gScore[neighbor] + heuristic(neighbor, goal)
+                if neighbor not in openSet
+                    add neighbor to openSet
+    
+    return no path found
+end procedure`,
       }
     ];
 
